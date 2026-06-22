@@ -11,7 +11,7 @@ y_cavablar = [0, 0, 0, 1, 1, 1, 0, 1]
 model = DecisionTreeClassifier()
 model.fit(X_data, y_cavablar)
 
-# Tarixçəni yadda saxlamaq üçün 'session_state' (sayt yenilənəndə məlumatı qoruyur)
+# Tarixçəni yadda saxlamaq
 if 'history' not in st.session_state:
     st.session_state.history = []
 
@@ -23,25 +23,27 @@ port = st.sidebar.number_input("Port:", value=80)
 if st.sidebar.button("Analiz et"):
     texmin = model.predict([[xata_kodu, port]])
     
-    # Nəticəni müəyyən edirik
+    st.subheader("Diaqnoz Nəticəsi:")
+    
     if texmin[0] == 0:
+        st.error("Nəticə: ŞƏBƏKƏ XƏTASI")
+        st.write("Məsləhət: Router-i yoxlayın, internet kabelini çıxarıb taxın.")
         sonuc = "ŞƏBƏKƏ XƏTASI"
     elif texmin[0] == 1:
+        st.warning("Nəticə: SİSTEM XƏTASI")
+        st.write("Məsləhət: Kompüteri yenidən başladın və RAM yaddaşını yoxlayın.")
         sonuc = "SİSTEM XƏTASI"
     else:
+        st.info("Nəticə: GİRİŞ/İCAZƏ XƏTASI")
+        st.write("Məsləhət: Şifrənizi yoxlayın və ya administratorla əlaqə saxlayın.")
         sonuc = "GİRİŞ XƏTASI"
     
-    # Nəticəni tarixçəyə əlavə edirik
+    # Tarixçəyə əlavə et
     st.session_state.history.append({"Xəta": xata_kodu, "Port": port, "Nəticə": sonuc})
-    
-    st.subheader("Diaqnoz Nəticəsi:")
-    st.success(f"{sonuc} aşkarlandı!")
 
-# Tarixçəni cədvəl şəklində göstər
+# Tarixçə cədvəli
 st.write("---")
 st.write("### 📜 Son Axtarışlar Tarixçəsi")
 if st.session_state.history:
-    df_history = pd.DataFrame(st.session_state.history)
-    st.table(df_history)
-else:
-    st.write("Hələ ki, heç bir axtarış edilməyib.")
+    df = pd.DataFrame(st.session_state.history)
+    st.table(df)
