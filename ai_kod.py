@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 
 st.title("🌐 Universal IT Xəta Diaqnoz Sistemi")
+st.write("Axtardığınız xəta kodunu aşağıda qeyd edin və diaqnoz alın:")
 
-# Bütün IT xətalarını burada saxlayırıq (Lüğət formatında)
-# İstədiyin qədər xəta əlavə edə bilərsən
+# Xəta bazası
 xeta_bazasi = {
     404: {"ad": "Not Found (Sayt tapılmadı)", "təsir": "Şəbəkə", "həll": "URL ünvanını yoxlayın."},
     500: {"ad": "Internal Server Error", "təsir": "Sistem", "həll": "Server tərəfində problem var, adminə yazın."},
@@ -13,21 +13,20 @@ xeta_bazasi = {
     200: {"ad": "OK (Xəta yoxdur)", "təsir": "Normal", "həll": "Hər şey qaydasındadır."}
 }
 
-# Yan panel
-st.sidebar.header("Xəta Kodu Daxil Et")
-kod = st.sidebar.number_input("Xəta kodu (Məs: 404, 500, 403):", value=404)
+# Axtarış üçün qutu (Yan panel əvəzinə əsas səhifədə)
+kod = st.number_input("Xəta kodunu daxil edin:", value=404)
 
-if st.sidebar.button("Diaqnoz qoy"):
+if st.button("Diaqnoz et"):
     if kod in xeta_bazasi:
         xeta = xeta_bazasi[kod]
-        st.success(f"Xəta: {xeta['ad']}")
+        st.success(f"Tapıldı: {xeta['ad']}")
         st.write(f"**Təsir dairəsi:** {xeta['təsir']}")
-        st.write(f"**Həll yolu:** {xeta['həll']}")
+        st.info(f"**Həll yolu:** {xeta['həll']}")
     else:
-        st.error("Bu xəta bazamızda yoxdur, amma ümumi olaraq: Log fayllarını yoxlayın!")
+        st.error("Bu xəta kodu bazamızda yoxdur.")
 
-# Bütün bazanı görmək üçün
 st.write("---")
-st.write("### 📚 Bazadakı Mövcud Xətalar")
+# Bütün siyahını görmək üçün cədvəl
+st.write("### 📚 Mövcud Xətaların Tam Siyahısı")
 df = pd.DataFrame.from_dict(xeta_bazasi, orient='index')
 st.table(df)
