@@ -11,7 +11,7 @@ y_cavablar = [0, 0, 0, 1, 1, 1, 0, 1]
 model = DecisionTreeClassifier()
 model.fit(X_data, y_cavablar)
 
-# Tarixçəni yadda saxlamaq
+# Tarixçəni yadda saxlamaq üçün
 if 'history' not in st.session_state:
     st.session_state.history = []
 
@@ -23,25 +23,24 @@ port = st.sidebar.number_input("Port:", value=80)
 if st.sidebar.button("Analiz et"):
     texmin = model.predict([[xata_kodu, port]])
     
-    st.subheader("Diaqnoz Nəticəsi:")
-    
     if texmin[0] == 0:
-        st.error("Nəticə: ŞƏBƏKƏ XƏTASI")
-        st.write("Məsləhət: Router-i yoxlayın, internet kabelini çıxarıb taxın.")
         sonuc = "ŞƏBƏKƏ XƏTASI"
+        meslehet = "Router-i yoxlayın, internet kabelini çıxarıb taxın."
     elif texmin[0] == 1:
-        st.warning("Nəticə: SİSTEM XƏTASI")
-        st.write("Məsləhət: Kompüteri yenidən başladın və RAM yaddaşını yoxlayın.")
         sonuc = "SİSTEM XƏTASI"
+        meslehet = "Kompüteri yenidən başladın və RAM yaddaşını yoxlayın."
     else:
-        st.info("Nəticə: GİRİŞ/İCAZƏ XƏTASI")
-        st.write("Məsləhət: Şifrənizi yoxlayın və ya administratorla əlaqə saxlayın.")
-        sonuc = "GİRİŞ XƏTASI"
+        sonuc = "GİRİŞ/İCAZƏ XƏTASI"
+        meslehet = "Şifrənizi yoxlayın və ya administratorla əlaqə saxlayın."
+    
+    # Nəticəni ekranda göstər
+    st.success(f"Diaqnoz: {sonuc}")
+    st.write(f"**Məsləhət:** {meslehet}")
     
     # Tarixçəyə əlavə et
     st.session_state.history.append({"Xəta": xata_kodu, "Port": port, "Nəticə": sonuc})
 
-# Tarixçə cədvəli
+# Yalnız cədvəli göstər
 st.write("---")
 st.write("### 📜 Son Axtarışlar Tarixçəsi")
 if st.session_state.history:
