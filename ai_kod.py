@@ -3,10 +3,11 @@ import google.generativeai as genai
 
 st.title("🤖 Hər şeyi Bilən İT Köməkçisi")
 
-# Secrets-dən açarı oxuyuruq
+# Açarın konfiqurasiyası
 try:
     genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-    model = genai.GenerativeModel('gemini-pro')
+    # Model adını yenilədik: 'gemini-pro' əvəzinə 'gemini-1.5-flash'
+    model = genai.GenerativeModel('gemini-1.5-flash')
 except Exception as e:
     st.error(f"Xəta: {e}")
     st.stop()
