@@ -1,19 +1,18 @@
 import streamlit as st
 import google.generativeai as genai
 
-# 1. Konfiqurasiya
 st.title("🤖 Hər şeyi Bilən İT Köməkçisi")
 
+# Secrets-dən açarı təhlükəsiz şəkildə oxuyuruq
 try:
-    # API açarını Secrets-dən alırıq
     api_key = st.secrets["GEMINI_API_KEY"]
     genai.configure(api_key=api_key)
+    # Daha stabil bir model adı istifadə edirik
     model = genai.GenerativeModel('gemini-1.5-flash')
 except Exception as e:
-    st.error(f"Xəta: {e}. Zəhmət olmasa Secrets-i yoxlayın.")
+    st.error(f"Xəta: {e}")
     st.stop()
 
-# 2. Söhbət məntiqi
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
