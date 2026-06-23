@@ -1,20 +1,31 @@
 import streamlit as st
 
-# Xəta kodları bazası (Bura istədiyin qədər xəta əlavə edə bilərsən)
+# Məlumat və Məsləhət Bazası
 xeta_bazasi = {
-    "404": "Səhifə tapılmadı. URL-i yoxlayın.",
-    "500": "Server daxili xətası. Texniki heyətə müraciət edin.",
-    "403": "Giriş qadağandır. İcazəniz yoxdur.",
-    "Port 80": "HTTP xidməti (Web) üçün istifadə olunur.",
-    "Port 443": "HTTPS xidməti (Təhlükəsiz Web) üçün istifadə olunur."
+    "404": {
+        "izah": "Səhifə tapılmadı. URL düzgün deyil və ya səhifə silinib.",
+        "meslehet": "URL-i iki dəfə yoxla, ola bilsin ki, bir hərfi səhv yazmısan."
+    },
+    "500": {
+        "izah": "Server daxili xətası. Proqramın arxa planında bir şey səhv getdi.",
+        "meslehet": "Səhifəni yenilə, əgər düzəlməsə, server loglarına bax."
+    },
+    "Port 22": {
+        "izah": "SSH (Secure Shell) portu. Serverə uzaqdan qoşulmaq üçün istifadə olunur.",
+        "meslehet": "Əgər qoşula bilmirsənsə, firewall parametrlərini yoxla."
+    }
 }
 
-st.title("Şəbəkə Xəta Analizatoru")
+st.title("IT Texniki Məsləhətçi 🤖")
 
-kod = st.text_input("Xəta kodu və ya Port nömrəsini daxil edin (məs: 404):")
+kod = st.text_input("Xəta kodunu və ya Portu daxil et (məs: 404):")
 
 if st.button("Analiz et"):
     if kod in xeta_bazasi:
-        st.success(f"Nəticə: {xeta_bazasi[kod]}")
+        st.subheader("İzahı:")
+        st.info(xeta_bazasi[kod]["izah"])
+        
+        st.subheader("Məsləhətim:")
+        st.success(xeta_bazasi[kod]["meslehet"])
     else:
-        st.warning("Bu xəta kodu bazamızda yoxdur. Zəhmət olmasa başqa kod daxil edin.")
+        st.warning("Bu kod məlumat bazamda yoxdur. Zəhmət olmasa başqa bir kod yoxla.")
