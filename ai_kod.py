@@ -1,6 +1,6 @@
 import streamlit as st
 
-# MƏLUMAT BAZASI: 60+ MADDƏ (Köhnələr + Yeni 20 əlavə)
+# MƏLUMAT BAZASI: 80+ MADDƏ (Köhnələr + Yeni 20 əlavə)
 it_bazasi = {
     # 1. WEB XƏTALARI
     "400": {"izah": "Bad Request", "meslehet": ["URL-i yoxla", "Parametrləri düzəlt"]},
@@ -49,7 +49,7 @@ it_bazasi = {
     "ManInTheMiddle": {"izah": "Ortadakı adam hücumu", "meslehet": ["VPN istifadə et"]},
     "DataBreach": {"izah": "Məlumat sızması", "meslehet": ["Bütün şifrələri dəyiş"]},
 
-    # 5. YENİ ƏLAVƏLƏR (20 MADDƏ)
+    # 5. ƏLAVƏLƏR (Genişləndirilmiş)
     "Timeout": {"izah": "Əlaqə vaxtı bitdi", "meslehet": ["Server cavabını gözlə"]},
     "Cache": {"izah": "Köhnə məlumatlar", "meslehet": ["Brauzer cache-ini təmizlə"]},
     "SSL": {"izah": "Təhlükəsizlik sertifikat səhvi", "meslehet": ["Tarixi yoxla"]},
@@ -69,11 +69,33 @@ it_bazasi = {
     "SegmentFault": {"izah": "Yaddaşa icazəsiz giriş", "meslehet": ["Pointer-ləri yoxla"]},
     "RuntimeError": {"izah": "İş vaxtı xətası", "meslehet": ["Loglara bax", "Kodun məntiqini yoxla"]},
     "409": {"izah": "Conflict (Konflikt)", "meslehet": ["Mənbəni yenilə"]},
-    "DiskFull": {"izah": "Serverin diski doludur", "meslehet": ["Logları sil", "Diski təmizlə"]}
+    "DiskFull": {"izah": "Serverin diski doludur", "meslehet": ["Logları sil", "Diski təmizlə"]},
+
+    # 6. YENİ 20 MADDƏ
+    "418": {"izah": "I'm a teapot", "meslehet": ["Bu bir zarafat kodudur, ciddi deyil"]},
+    "422": {"izah": "Unprocessable Entity", "meslehet": ["JSON formatını yoxla"]},
+    "508": {"izah": "Loop Detected", "meslehet": ["Yönləndirmə döngüsünü düzəlt"]},
+    "InvalidToken": {"izah": "Token yararsızdır", "meslehet": ["Yenidən giriş edin"]},
+    "SessionExpired": {"izah": "Sessiya müddəti bitdi", "meslehet": ["Səhifəni yenilə"]},
+    "HardwareFailure": {"izah": "Avadanlıq nasazlığı", "meslehet": ["Servisə müraciət et"]},
+    "Overheating": {"izah": "Həddən artıq qızma", "meslehet": ["Ventilyatoru yoxla"]},
+    "BIOS-Error": {"izah": "BIOS/UEFI xətası", "meslehet": ["Batareyanı yoxla"]},
+    "AP-Isolation": {"izah": "Wi-Fi cihazları bir-birini görmür", "meslehet": ["Router ayarını dəyiş"]},
+    "BandwidthLimit": {"izah": "İnternet limiti aşıldı", "meslehet": ["Provayderlə əlaqə saxla"]},
+    "DatabaseLocked": {"izah": "Baza kilidli", "meslehet": ["Prosesləri öldür"]},
+    "FileCorrupted": {"izah": "Fayl xarab olub", "meslehet": ["Faylı yenidən yüklə"]},
+    "MissingDLL": {"izah": "Kitabxana faylı çatışmır", "meslehet": ["Driveri yenilə"]},
+    "DiskWriteError": {"izah": "Diskə yazmaq olmur", "meslehet": ["İcazələri yoxla"]},
+    "NoRouteToHost": {"izah": "Host tapılmadı", "meslehet": ["İnterneti yoxla"]},
+    "ConnectionRefused": {"izah": "Qoşulma rədd edildi", "meslehet": ["Portu yoxla"]},
+    "RegistryLocked": {"izah": "Registry kilidli", "meslehet": ["Admin kimi aç"]},
+    "ServiceTimeout": {"izah": "Servis gecikir", "meslehet": ["Serveri restart et"]},
+    "SSLHandshake": {"izah": "SSL əlaqə qurulmadı", "meslehet": ["Sertifikatı yoxla"]},
+    "PermissionDenied": {"izah": "İcazə yoxdur", "meslehet": ["Sudo/Admin hüququnu yoxla"]}
 }
 
 st.set_page_config(page_title="Professional IT Bilik Bazası", page_icon="💻")
-st.title("💻 Professional IT Bilik Bazası (60+)")
+st.title("💻 Professional IT Bilik Bazası (80+)")
 
 axtaris = st.text_input("Axtarış üçün xəta kodu və ya açar söz yazın:").strip().lower()
 
