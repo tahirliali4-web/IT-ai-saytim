@@ -1,42 +1,53 @@
 import streamlit as st
 
-# 30+ IT məlumatı olan nəhəng baza
+# 45+ IT məlumatı olan geniş baza
 it_bazasi = {
+    # Web Xətaları
     "400": {"izah": "Bad Request (Yanlış sorğu).", "meslehet": ["URL-i yoxla", "Parametrləri düzəlt"]},
-    "401": {"izah": "Unauthorized (Giriş icazəsi yoxdur).", "meslehet": ["Düzgün şifrə daxil et", "Session-u yoxla"]},
+    "401": {"izah": "Unauthorized (Giriş icazəsi yoxdur).", "meslehet": ["Login/Şifrəni yoxla", "Session-u yoxla"]},
     "403": {"izah": "Forbidden (Giriş qadağandır).", "meslehet": ["İcazələri yoxla", "Adminlə əlaqə saxla"]},
     "404": {"izah": "Not Found (Səhifə tapılmadı).", "meslehet": ["URL-i yoxla", "Səhifə silinib ola bilər"]},
-    "405": {"izah": "Method Not Allowed (Metod qadağandır).", "meslehet": ["GET/POST metodunu yoxla"]},
-    "408": {"izah": "Request Timeout (Sorğu vaxtı bitdi).", "meslehet": ["İnterneti yoxla", "Səhifəni yenilə"]},
-    "500": {"izah": "Internal Server Error (Server xətası).", "meslehet": ["Serveri yenilə", "Loglara bax"]},
-    "502": {"izah": "Bad Gateway (Keçid xətası).", "meslehet": ["Serveri restart et", "Bir az gözlə"]},
-    "503": {"izah": "Service Unavailable (Xidmət yoxdur).", "meslehet": ["Serverin yüklənməsini yoxla"]},
-    "504": {"izah": "Gateway Timeout (Keçid vaxtı bitdi).", "meslehet": ["DNS-i yoxla", "Serverin cavabını gözlə"]},
-    "DNS": {"izah": "Ad həlli xətası (DNS Error).", "meslehet": ["DNS-i 8.8.8.8 et", "İnterneti yoxla"]},
-    "SSL": {"izah": "SSL sertifikat xətası.", "meslehet": ["Tarixi yoxla", "Sertifikatı yenilə"]},
-    "SyntaxError": {"izah": "Python Sintaksis səhvi.", "meslehet": ["Mötərizəni yoxla", "Dırnağı bağla"]},
-    "NameError": {"izah": "Python dəyişən adı tapılmadı.", "meslehet": ["Dəyişəni təyin et", "Adı düz yaz"]},
-    "TypeError": {"izah": "Python tip uyğunsuzluğu.", "meslehet": ["Str və Int-i toplama", "Tipə diqqət et"]},
-    "IndexError": {"izah": "Python siyahı indeksi səhvi.", "meslehet": ["Siyahının ölçüsünü yoxla"]},
-    "KeyError": {"izah": "Python lüğət açarı xətası.", "meslehet": ["Açarın mövcudluğunu yoxla"]},
+    "405": {"izah": "Method Not Allowed.", "meslehet": ["GET/POST metodunu yoxla"]},
+    "408": {"izah": "Request Timeout.", "meslehet": ["İnterneti yoxla", "Səhifəni yenilə"]},
+    "429": {"izah": "Too Many Requests.", "meslehet": ["Bir az gözlə", "Limitləri yoxla"]},
+    "500": {"izah": "Internal Server Error.", "meslehet": ["Server loglarına bax", "Kodu debug et"]},
+    "502": {"izah": "Bad Gateway.", "meslehet": ["Serveri restart et", "Bir az gözlə"]},
+    "503": {"izah": "Service Unavailable.", "meslehet": ["Server yükünü yoxla"]},
+    "504": {"izah": "Gateway Timeout.", "meslehet": ["DNS-i yoxla", "Server cavabını gözlə"]},
+    
+    # Proqramlaşdırma
+    "SyntaxError": {"izah": "Yazılış qaydası səhvi.", "meslehet": ["Mötərizəni yoxla", "Dırnağı bağla"]},
+    "NameError": {"izah": "Dəyişən adı səhvi.", "meslehet": ["Dəyişəni təyin et", "Adı düz yaz"]},
+    "TypeError": {"izah": "Tip uyğunsuzluğu.", "meslehet": ["Str və Int-i toplama", "Tipə diqqət et"]},
+    "IndexError": {"izah": "Siyahı indeksi səhvi.", "meslehet": ["Siyahı ölçüsünü yoxla"]},
+    "KeyError": {"izah": "Lüğət açarı səhvi.", "meslehet": ["Açarın mövcudluğunu yoxla"]},
+    "IndentationError": {"izah": "Boşluq xətası (Python).", "meslehet": ["Tab və ya boşluqları düzəlt"]},
+    "AttributeError": {"izah": "Yanlış atribut.", "meslehet": ["Metodun adını yoxla"]},
+    "ValueError": {"izah": "Yanlış dəyər.", "meslehet": ["Dəyişən dəyərini yoxla"]},
+    
+    # Şəbəkə və Sistem
+    "DNS": {"izah": "Ad həlli xətası.", "meslehet": ["8.8.8.8-ə keç", "İnterneti yoxla"]},
+    "SSL": {"izah": "Təhlükəsizlik sertifikat səhvi.", "meslehet": ["Tarixi yoxla", "Sertifikatı yenilə"]},
     "RAM": {"izah": "Yaddaş çatışmazlığı.", "meslehet": ["Lazımsız proqramı bağla", "Restart et"]},
-    "CPU": {"izah": "Prosessor həddən artıq yükləndi.", "meslehet": ["Task Manager-ə bax", "Soyutmanı yoxla"]},
+    "CPU": {"izah": "Prosessor həddən artıq yükləndi.", "meslehet": ["Task Manager-ə bax"]},
     "HDD": {"izah": "Disk doludur.", "meslehet": ["Faylları sil", "Diski təmizlə"]},
-    "Port 21": {"izah": "FTP bağlantı portu.", "meslehet": ["Firewall-u yoxla"]},
-    "Port 22": {"izah": "SSH uzaqdan idarə portu.", "meslehet": ["Serverin açıq olduğundan əmin ol"]},
-    "Port 80": {"izah": "HTTP web portu.", "meslehet": ["Server servisinin işlədiyini yoxla"]},
-    "Port 3306": {"izah": "MySQL verilənlər bazası portu.", "meslehet": ["Bazanın işlədiyini yoxla"]},
-    "BlueScreen": {"izah": "Windows sistem çökməsi.", "meslehet": ["RAM-ı yoxla", "Driverləri yenilə"]},
-    "AccessDenied": {"izah": "Fayla giriş qadağandır.", "meslehet": ["Administrator hüququ ilə aç"]},
-    "Timeout": {"izah": "Əlaqə vaxtı bitdi.", "meslehet": ["İnterneti yoxla", "Serverin cavabını gözlə"]},
-    "429": {"izah": "Too Many Requests (Həddən artıq sorğu).", "meslehet": ["Bir az gözlə", "Limitləri yoxla"]},
-    "SQL-1064": {"izah": "SQL sintaksis xətası.", "meslehet": ["Sorğunu yoxla", "Dırnaqlara diqqət et"]},
     "Ping": {"izah": "Bağlantı yoxlanışı.", "meslehet": ["Serverin IP ünvanını yoxla"]},
-    "Cache": {"izah": "Köhnə məlumatların saxlanması.", "meslehet": ["Brauzer cache-ini təmizlə"]}
+    "Cache": {"izah": "Köhnə məlumat saxlanması.", "meslehet": ["Brauzer cache-ini təmizlə"]},
+    "BlueScreen": {"izah": "Windows sistem çökməsi.", "meslehet": ["RAM-ı yoxla", "Driverləri yenilə"]},
+    "AccessDenied": {"izah": "Giriş qadağandır.", "meslehet": ["Administrator kimi aç"]},
+    
+    # Digər Texniki Terminlər
+    "API": {"izah": "İnterfeys xətası.", "meslehet": ["Endpoint-i yoxla", "Token-i yenilə"]},
+    "Firewall": {"izah": "Şəbəkə qoruma divarı.", "meslehet": ["Portun açıq olmasını yoxla"]},
+    "VPN": {"izah": "Virtual şəbəkə problemi.", "meslehet": ["Bağlantını sıfırla"]},
+    "Git": {"izah": "Versiya idarəetmə xətası.", "meslehet": ["Merge konfliktini həll et"]},
+    "Docker": {"izah": "Konteyner işə düşmür.", "meslehet": ["Docker loglarına bax"]},
+    "MySQL": {"izah": "Baza qoşulma xətası.", "meslehet": ["Host adını yoxla"]},
+    "FTP": {"izah": "Fayl ötürmə xətası.", "meslehet": ["Passiv rejimi yoxla"]}
 }
 
 st.set_page_config(page_title="IT Ensiklopediyası", page_icon="🌐")
-st.title("🌐 IT Ensiklopediyası")
+st.title("🌐 IT Mütəxəssis Aləti")
 
 axtaris = st.text_input("Axtarış (Xəta kodu və ya açar söz):").strip().lower()
 
@@ -55,7 +66,7 @@ if axtaris:
         st.error("Nəticə tapılmadı.")
 
 st.write("---")
-with st.expander("📂 Bazadakı 30+ kodun siyahısı:"):
+with st.expander("📂 Bazadakı bütün xəta kodları:"):
     st.write(list(it_bazasi.keys()))
 
 st.write("---")
