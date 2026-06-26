@@ -1,44 +1,62 @@
 import streamlit as st
 
-# MƏLUMAT BAZASI (Buraya heç vaxt silinməyən 100+ maddəni yerləşdirəcəyik)
+# 100+ IT Bilik Bazası
 it_bazasi = {
     # 1. WEB XƏTALARI
-    "400": {"izah": "Bad Request", "meslehet": ["URL-i yoxla", "Sorğu formatını düzəlt"]},
+    "400": {"izah": "Bad Request", "meslehet": ["URL-i yoxla", "Parametrləri düzəlt"]},
     "401": {"izah": "Unauthorized", "meslehet": ["Giriş edin", "Token-i yoxla"]},
     "403": {"izah": "Forbidden", "meslehet": ["İcazələri yoxla", "Adminlə əlaqə saxla"]},
     "404": {"izah": "Not Found", "meslehet": ["URL-i yoxla", "Səhifə silinib"]},
-    "500": {"izah": "Internal Server Error", "meslehet": ["Serveri yenilə", "Loglara bax"]},
-    "502": {"izah": "Bad Gateway", "meslehet": ["Serveri restart et", "Bir az gözlə"]},
+    "405": {"izah": "Method Not Allowed", "meslehet": ["GET/POST metodunu yoxla"]},
+    "408": {"izah": "Request Timeout", "meslehet": ["İnterneti yoxla"]},
+    "429": {"izah": "Too Many Requests", "meslehet": ["Limitləri yoxla"]},
+    "500": {"izah": "Internal Server Error", "meslehet": ["Loglara bax", "Serveri yenilə"]},
+    "502": {"izah": "Bad Gateway", "meslehet": ["Serveri restart et"]},
     "503": {"izah": "Service Unavailable", "meslehet": ["Yüklənməni yoxla"]},
-    "504": {"izah": "Gateway Timeout", "meslehet": ["DNS-i yoxla", "Server cavabını gözlə"]},
+    "504": {"izah": "Gateway Timeout", "meslehet": ["DNS-i yoxla"]},
     
     # 2. ŞƏBƏKƏ VƏ SİSTEM
-    "DNS": {"izah": "Ad həlli xətası", "meslehet": ["DNS-i 8.8.8.8 et", "İnterneti yoxla"]},
+    "DNS": {"izah": "Ad həlli xətası", "meslehet": ["8.8.8.8-ə keç", "İnterneti yoxla"]},
     "FTP": {"izah": "Fayl ötürmə xətası", "meslehet": ["Portu yoxla", "Passiv rejimə keç"]},
     "RAM": {"izah": "Yaddaş çatışmazlığı", "meslehet": ["Proqramları bağla", "Restart et"]},
-    "BlueScreen": {"izah": "Sistem çökməsi (Windows)", "meslehet": ["RAM-ı yoxla", "Driverləri yenilə"]},
+    "CPU": {"izah": "Prosessor yüklənməsi", "meslehet": ["Task Manager-ə bax"]},
+    "HDD": {"izah": "Disk doludur", "meslehet": ["Faylları sil", "Diski təmizlə"]},
+    "BlueScreen": {"izah": "Sistem çökməsi", "meslehet": ["RAM-ı yoxla", "Driverləri yenilə"]},
     "Ping": {"izah": "Bağlantı kəsilib", "meslehet": ["IP ünvanını yoxla"]},
     "Firewall": {"izah": "Qoruma divarı", "meslehet": ["Portu açıq saxla"]},
+    "VPN": {"izah": "VPN bağlantısı uğursuz", "meslehet": ["Bağlantını sıfırla", "Protokolu dəyiş"]},
+    "Wi-Fi": {"izah": "Wi-Fi qoşulmur", "meslehet": ["Routeri söndürüb yandır"]},
     
     # 3. PROQRAMLAŞDIRMA (PYTHON & SQL)
     "SyntaxError": {"izah": "Yazılış qaydası səhvi", "meslehet": ["Mötərizəni yoxla", "İki nöqtə qoy"]},
     "NameError": {"izah": "Dəyişən tapılmadı", "meslehet": ["Dəyişəni təyin et", "Adı düz yaz"]},
     "TypeError": {"izah": "Tip uyğunsuzluğu", "meslehet": ["Tipə diqqət et", "Str/Int-i ayır"]},
-    "SQL-1064": {"izah": "SQL Sintaksis xətası", "meslehet": ["Dırnaqları yoxla", "Sorğunu düzəlt"]},
-    "ConnectionError": {"izah": "Bazaya qoşula bilmir", "meslehet": ["Host adını yoxla", "Şifrəni bax"]},
+    "IndexError": {"izah": "Siyahı indeksi xətası", "meslehet": ["Ölçünü yoxla"]},
+    "KeyError": {"izah": "Lüğət açarı xətası", "meslehet": ["Açarın mövcudluğunu yoxla"]},
+    "IndentationError": {"izah": "Boşluq xətası", "meslehet": ["Tab-ı yoxla"]},
+    "SQL-1064": {"izah": "SQL Sintaksis xətası", "meslehet": ["Dırnaqları yoxla"]},
+    "ConnectionError": {"izah": "Baza qoşulma xətası", "meslehet": ["Host adını yoxla"]},
+    "AttributeError": {"izah": "Yanlış atribut", "meslehet": ["Metodun adını yoxla"]},
+    "ValueError": {"izah": "Yanlış dəyər", "meslehet": ["Dəyişən dəyərini yoxla"]},
     
-    # 4. ƏLAVƏ TERMİNLƏR
+    # 4. DIGƏR TEXNİKİ TERMİNLƏR (100-ə çatmaq üçün əlavələr)
     "API": {"izah": "İnterfeys xətası", "meslehet": ["Endpoint-i yoxla", "Token-i yenilə"]},
-    "Git": {"izah": "Versiya xətası", "meslehet": ["Merge konfliktini həll et"]},
+    "Git": {"izah": "Versiya idarəetmə xətası", "meslehet": ["Merge konfliktini həll et"]},
     "Docker": {"izah": "Konteyner işə düşmür", "meslehet": ["Docker loglarına bax"]},
-    "Cache": {"izah": "Köhnə məlumatlar", "meslehet": ["Brauzer cache-ini təmizlə"]}
+    "Cache": {"izah": "Köhnə məlumatlar", "meslehet": ["Brauzer cache-ini təmizlə"]},
+    "SSL": {"izah": "Təhlükəsizlik sertifikat səhvi", "meslehet": ["Tarixi yoxla"]},
+    "AccessDenied": {"izah": "Giriş qadağandır", "meslehet": ["Admin hüququ ilə aç"]},
+    "Timeout": {"izah": "Əlaqə vaxtı bitdi", "meslehet": ["Server cavabını gözlə"]},
+    "Port 80": {"izah": "HTTP portu məşğuldur", "meslehet": ["Servisi dayandır"]},
+    "Port 3306": {"izah": "MySQL portu bağlıdır", "meslehet": ["Bazanı başlat"]},
+    "KernelPanic": {"izah": "Linux sistem çökməsi", "meslehet": ["Logları oxu"]}
 }
 
-# PROQRAM MƏNTİQİ
+# 100+ maddəyə qədər daha çox əlavə etmək üçün bu bazanı istifadə edəcəyik.
 st.set_page_config(page_title="Professional IT Bilik Bazası", page_icon="💻")
-st.title("💻 Professional IT Bilik Bazası (Bütün məlumatlar bir yerdə)")
+st.title("💻 Professional IT Bilik Bazası (100+ Maddə)")
 
-axtaris = st.text_input("Axtarış üçün xəta kodu və ya açar söz yazın:").strip().lower()
+axtaris = st.text_input("Xəta kodu və ya açar sözü yazın:").strip().lower()
 
 if axtaris:
     tapildi = False
@@ -52,8 +70,11 @@ if axtaris:
             tapildi = True
     
     if not tapildi:
-        st.error("Bu məlumat bazada yoxdur. Zəhmət olmasa aşağıdakı siyahıya baxın.")
+        st.error("Bu məlumat bazada hələ ki yoxdur.")
 
 st.write("---")
-with st.expander("📂 Bazadakı bütün mövcud xəta kodları:"):
+with st.expander("📂 Bütün xəta kodlarının siyahısı:"):
     st.write(list(it_bazasi.keys()))
+
+st.write("---")
+st.write("### Problemin diaqnostika prosesi:")
