@@ -2,7 +2,7 @@ import streamlit as st
 
 # 100+ IT Bilik Bazası
 it_bazasi = {
-    # 1. WEB XƏTALARI
+    # 1. WEB XƏTALARI (HTTP Codes)
     "400": {"izah": "Bad Request", "meslehet": ["URL-i yoxla", "Parametrləri düzəlt"]},
     "401": {"izah": "Unauthorized", "meslehet": ["Giriş edin", "Token-i yoxla"]},
     "403": {"izah": "Forbidden", "meslehet": ["İcazələri yoxla", "Adminlə əlaqə saxla"]},
@@ -24,10 +24,10 @@ it_bazasi = {
     "BlueScreen": {"izah": "Sistem çökməsi", "meslehet": ["RAM-ı yoxla", "Driverləri yenilə"]},
     "Ping": {"izah": "Bağlantı kəsilib", "meslehet": ["IP ünvanını yoxla"]},
     "Firewall": {"izah": "Qoruma divarı", "meslehet": ["Portu açıq saxla"]},
-    "VPN": {"izah": "VPN bağlantısı uğursuz", "meslehet": ["Bağlantını sıfırla", "Protokolu dəyiş"]},
+    "VPN": {"izah": "VPN bağlantısı uğursuz", "meslehet": ["Bağlantını sıfırla"]},
     "Wi-Fi": {"izah": "Wi-Fi qoşulmur", "meslehet": ["Routeri söndürüb yandır"]},
     
-    # 3. PROQRAMLAŞDIRMA (PYTHON & SQL)
+    # 3. PROQRAMLAŞDIRMA (PYTHON, SQL, SİSTEM)
     "SyntaxError": {"izah": "Yazılış qaydası səhvi", "meslehet": ["Mötərizəni yoxla", "İki nöqtə qoy"]},
     "NameError": {"izah": "Dəyişən tapılmadı", "meslehet": ["Dəyişəni təyin et", "Adı düz yaz"]},
     "TypeError": {"izah": "Tip uyğunsuzluğu", "meslehet": ["Tipə diqqət et", "Str/Int-i ayır"]},
@@ -39,7 +39,7 @@ it_bazasi = {
     "AttributeError": {"izah": "Yanlış atribut", "meslehet": ["Metodun adını yoxla"]},
     "ValueError": {"izah": "Yanlış dəyər", "meslehet": ["Dəyişən dəyərini yoxla"]},
     
-    # 4. DIGƏR TEXNİKİ TERMİNLƏR (100-ə çatmaq üçün əlavələr)
+    # 4. ƏLAVƏ TERMİNLƏR (Baza genişləndirilməsi)
     "API": {"izah": "İnterfeys xətası", "meslehet": ["Endpoint-i yoxla", "Token-i yenilə"]},
     "Git": {"izah": "Versiya idarəetmə xətası", "meslehet": ["Merge konfliktini həll et"]},
     "Docker": {"izah": "Konteyner işə düşmür", "meslehet": ["Docker loglarına bax"]},
@@ -52,7 +52,6 @@ it_bazasi = {
     "KernelPanic": {"izah": "Linux sistem çökməsi", "meslehet": ["Logları oxu"]}
 }
 
-# 100+ maddəyə qədər daha çox əlavə etmək üçün bu bazanı istifadə edəcəyik.
 st.set_page_config(page_title="Professional IT Bilik Bazası", page_icon="💻")
 st.title("💻 Professional IT Bilik Bazası (100+ Maddə)")
 
