@@ -1,6 +1,6 @@
 import streamlit as st
 
-# MƏLUMAT BAZASI: 80+ MADDƏ (Köhnələr + Yeni 20 əlavə)
+# MƏLUMAT BAZASI: 100+ MADDƏ (Köhnələr + Yeni 20 əlavə)
 it_bazasi = {
     # 1. WEB XƏTALARI
     "400": {"izah": "Bad Request", "meslehet": ["URL-i yoxla", "Parametrləri düzəlt"]},
@@ -49,7 +49,7 @@ it_bazasi = {
     "ManInTheMiddle": {"izah": "Ortadakı adam hücumu", "meslehet": ["VPN istifadə et"]},
     "DataBreach": {"izah": "Məlumat sızması", "meslehet": ["Bütün şifrələri dəyiş"]},
 
-    # 5. ƏLAVƏLƏR (Genişləndirilmiş)
+    # 5. ƏLAVƏLƏR
     "Timeout": {"izah": "Əlaqə vaxtı bitdi", "meslehet": ["Server cavabını gözlə"]},
     "Cache": {"izah": "Köhnə məlumatlar", "meslehet": ["Brauzer cache-ini təmizlə"]},
     "SSL": {"izah": "Təhlükəsizlik sertifikat səhvi", "meslehet": ["Tarixi yoxla"]},
@@ -91,11 +91,33 @@ it_bazasi = {
     "RegistryLocked": {"izah": "Registry kilidli", "meslehet": ["Admin kimi aç"]},
     "ServiceTimeout": {"izah": "Servis gecikir", "meslehet": ["Serveri restart et"]},
     "SSLHandshake": {"izah": "SSL əlaqə qurulmadı", "meslehet": ["Sertifikatı yoxla"]},
-    "PermissionDenied": {"izah": "İcazə yoxdur", "meslehet": ["Sudo/Admin hüququnu yoxla"]}
+    "PermissionDenied": {"izah": "İcazə yoxdur", "meslehet": ["Sudo/Admin hüququnu yoxla"]},
+    
+    # 7. DAHA 20 YENİ MADDƏ
+    "406": {"izah": "Not Acceptable", "meslehet": ["Header məlumatını yoxla"]},
+    "407": {"izah": "Proxy Authentication Required", "meslehet": ["Proxy şifrəsini daxil et"]},
+    "410": {"izah": "Gone", "meslehet": ["Resurs birdəfəlik silinib"]},
+    "411": {"izah": "Length Required", "meslehet": ["Content-Length əlavə et"]},
+    "413": {"izah": "Payload Too Large", "meslehet": ["Fayl ölçüsünü kiçilt"]},
+    "414": {"izah": "URI Too Long", "meslehet": ["URL-i qısalt"]},
+    "415": {"izah": "Unsupported Media Type", "meslehet": ["Fayl formatını yoxla"]},
+    "501": {"izah": "Not Implemented", "meslehet": ["Server metodu dəstəkləmir"]},
+    "505": {"izah": "HTTP Version Not Supported", "meslehet": ["Protokolu yoxla"]},
+    "507": {"izah": "Insufficient Storage", "meslehet": ["Serverdə yer boşalt"]},
+    "511": {"izah": "Network Authentication Required", "meslehet": ["Wi-Fi girişini təsdiqlə"]},
+    "Cloudflare-520": {"izah": "Web server boş cavab verdi", "meslehet": ["Server loglarına bax"]},
+    "Cloudflare-521": {"izah": "Server əlaqəni rədd etdi", "meslehet": ["Firewall-ı yoxla"]},
+    "Cloudflare-522": {"izah": "Connection Timed Out", "meslehet": ["Serveri yoxla"]},
+    "Cloudflare-523": {"izah": "Origin is Unreachable", "meslehet": ["DNS-i yoxla"]},
+    "Cloudflare-524": {"izah": "A Timeout Occurred", "meslehet": ["Sorğunun müddətinə bax"]},
+    "Docker-Pull-Error": {"izah": "İmage yüklənmədi", "meslehet": ["Docker login et"]},
+    "Git-Merge-Conflict": {"izah": "Fayllar toqquşdu", "meslehet": ["Kodları manuel birləşdir"]},
+    "Jenkins-Build-Fail": {"izah": "Build uğursuz oldu", "meslehet": ["Pipeline koduna bax"]},
+    "K8s-CrashLoop": {"izah": "Pod daim yenilənir", "meslehet": ["Pod loglarını yoxla"]}
 }
 
 st.set_page_config(page_title="Professional IT Bilik Bazası", page_icon="💻")
-st.title("💻 Professional IT Bilik Bazası (80+)")
+st.title("💻 Professional IT Bilik Bazası (100+)")
 
 axtaris = st.text_input("Axtarış üçün xəta kodu və ya açar söz yazın:").strip().lower()
 
@@ -116,3 +138,6 @@ if axtaris:
 st.write("---")
 with st.expander("📂 Bütün xəta kodlarının siyahısı:"):
     st.write(list(it_bazasi.keys()))
+
+st.write("---")
+st.write("### Problemin diaqnostika prosesi:")
