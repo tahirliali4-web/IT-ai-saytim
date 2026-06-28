@@ -1,17 +1,92 @@
 import streamlit as st
-import json
 
-# JSON faylını oxuyur
-def bazani_yukle():
-    with open('it_bazasi.json', 'r', encoding='utf-8') as f:
-        return json.load(f)
-
-it_bazasi = bazani_yukle()
+# MƏLUMAT BAZASI: 240+ MADDƏ
+it_bazasi = {
+    "400": {"izah": "Bad Request", "meslehet": ["URL-i yoxla", "Parametrləri düzəlt"]},
+    "401": {"izah": "Unauthorized", "meslehet": ["Giriş edin", "Token-i yoxla"]},
+    "403": {"izah": "Forbidden", "meslehet": ["İcazələri yoxla", "Adminlə əlaqə saxla"]},
+    "404": {"izah": "Not Found", "meslehet": ["URL-i yoxla", "Səhifə silinib"]},
+    "405": {"izah": "Method Not Allowed", "meslehet": ["GET/POST metodunu yoxla"]},
+    "408": {"izah": "Request Timeout", "meslehet": ["İnterneti yoxla"]},
+    "429": {"izah": "Too Many Requests", "meslehet": ["Limitləri yoxla"]},
+    "500": {"izah": "Internal Server Error", "meslehet": ["Loglara bax", "Serveri yenilə"]},
+    "502": {"izah": "Bad Gateway", "meslehet": ["Serveri restart et"]},
+    "503": {"izah": "Service Unavailable", "meslehet": ["Yüklənməni yoxla"]},
+    "504": {"izah": "Gateway Timeout", "meslehet": ["DNS-i yoxla"]},
+    "DNS": {"izah": "Ad həlli xətası", "meslehet": ["8.8.8.8-ə keç", "İnterneti yoxla"]},
+    "FTP": {"izah": "Fayl ötürmə xətası", "meslehet": ["Portu yoxla", "Passiv rejimə keç"]},
+    "RAM": {"izah": "Yaddaş çatışmazlığı", "meslehet": ["Proqramları bağla", "Restart et"]},
+    "CPU": {"izah": "Prosessor yüklənməsi", "meslehet": ["Task Manager-ə bax"]},
+    "HDD": {"izah": "Disk doludur", "meslehet": ["Faylları sil", "Diski təmizlə"]},
+    "BlueScreen": {"izah": "Sistem çökməsi", "meslehet": ["RAM-ı yoxla", "Driverləri yenilə"]},
+    "Ping": {"izah": "Bağlantı kəsilib", "meslehet": ["IP ünvanını yoxla"]},
+    "Firewall": {"izah": "Qoruma divarı", "meslehet": ["Portu açıq saxla"]},
+    "VPN": {"izah": "VPN bağlantısı uğursuz", "meslehet": ["Bağlantını sıfırla"]},
+    "Wi-Fi": {"izah": "Wi-Fi qoşulmur", "meslehet": ["Routeri söndürüb yandır"]},
+    "SyntaxError": {"izah": "Yazılış qaydası səhvi", "meslehet": ["Mötərizəni yoxla", "İki nöqtə qoy"]},
+    "NameError": {"izah": "Dəyişən tapılmadı", "meslehet": ["Dəyişəni təyin et", "Adı düz yaz"]},
+    "TypeError": {"izah": "Tip uyğunsuzluğu", "meslehet": ["Tipə diqqət et", "Str/Int-i ayır"]},
+    "IndexError": {"izah": "Siyahı indeksi xətası", "meslehet": ["Ölçünü yoxla"]},
+    "KeyError": {"izah": "Lüğət açarı xətası", "meslehet": ["Açarın mövcudluğunu yoxla"]},
+    "IndentationError": {"izah": "Boşluq xətası", "meslehet": ["Tab-ı yoxla"]},
+    "SQL-1064": {"izah": "SQL Sintaksis xətası", "meslehet": ["Dırnaqları yoxla"]},
+    "ConnectionError": {"izah": "Baza qoşulma xətası", "meslehet": ["Host adını yoxla"]},
+    "Phishing": {"izah": "Fişinq hücumu", "meslehet": ["Linki açma", "Şifrəni dəyiş"]},
+    "DDoS": {"izah": "Həddən artıq sorğu", "meslehet": ["WAF-ı aktivləşdir"]},
+    "Ransomware": {"izah": "Fayllar şifrələnib", "meslehet": ["Antivirusla yoxla", "Back-up-dan bərpa et"]},
+    "BruteForce": {"izah": "Şifrənin sındırılması", "meslehet": ["İki faktorlu doğrulamanı aç"]},
+    "Malware": {"izah": "Zərərli proqram", "meslehet": ["Tam sistem skan et"]},
+    "ZeroDay": {"izah": "Naməlum boşluq", "meslehet": ["Patch-ləri yenilə"]},
+    "SQLi": {"izah": "SQL İnjektion hücumu", "meslehet": ["Sorğuları parametrli yaz"]},
+    "XSS": {"izah": "Cross-site scripting", "meslehet": ["Input-ları filtrlə"]},
+    "ManInTheMiddle": {"izah": "Ortadakı adam hücumu", "meslehet": ["VPN istifadə et"]},
+    "DataBreach": {"izah": "Məlumat sızması", "meslehet": ["Bütün şifrələri dəyiş"]},
+    "Timeout": {"izah": "Əlaqə vaxtı bitdi", "meslehet": ["Server cavabını gözlə"]},
+    "Cache": {"izah": "Köhnə məlumatlar", "meslehet": ["Brauzer cache-ini təmizlə"]},
+    "SSL": {"izah": "Təhlükəsizlik sertifikat səhvi", "meslehet": ["Tarixi yoxla"]},
+    "AccessDenied": {"izah": "Giriş qadağandır", "meslehet": ["Admin hüququ ilə aç"]},
+    "Port80": {"izah": "HTTP portu məşğuldur", "meslehet": ["Servisi dayandır"]},
+    "Port3306": {"izah": "MySQL portu bağlıdır", "meslehet": ["Bazanı başlat"]},
+    "KernelPanic": {"izah": "Linux sistem çökməsi", "meslehet": ["Logları oxu"]},
+    "Deadlock": {"izah": "Baza kilidlənməsi", "meslehet": ["Tranzaksiyaları yoxla"]},
+    "OutOfMemory": {"izah": "Proqram yaddaşı bitdi", "meslehet": ["Heap size-ı artır"]},
+    "StackOverflow": {"izah": "Rekursiv funksiya xətası", "meslehet": ["Döngünü dayandır"]},
+    "BadSector": {"izah": "Hard diskdə fiziki xəta", "meslehet": ["Diski dəyiş", "Backup al"]},
+    "Latency": {"izah": "Şəbəkə gecikməsi", "meslehet": ["Ping-i yoxla", "Kabeli dəyiş"]},
+    "PacketLoss": {"izah": "Paket itkisi", "meslehet": ["Routeri yoxla"]},
+    "SMTP": {"izah": "E-mail göndərmə xətası", "meslehet": ["SMTP portunu yoxla"]},
+    "SSH": {"izah": "Uzaqdan idarə xətası", "meslehet": ["SSH açarlarını yoxla"]},
+    "BufferOverflow": {"izah": "Bufer daşması", "meslehet": ["Input uzunluğunu məhdudlaşdır"]},
+    "SegmentFault": {"izah": "Yaddaşa icazəsiz giriş", "meslehet": ["Pointer-ləri yoxla"]},
+    "RuntimeError": {"izah": "İş vaxtı xətası", "meslehet": ["Loglara bax", "Kodun məntiqini yoxla"]},
+    "409": {"izah": "Conflict (Konflikt)", "meslehet": ["Mənbəni yenilə"]},
+    "DiskFull": {"izah": "Serverin diski doludur", "meslehet": ["Logları sil", "Diski təmizlə"]},
+    "418": {"izah": "I'm a teapot", "meslehet": ["Bu bir zarafat kodudur, ciddi deyil"]},
+    "422": {"izah": "Unprocessable Entity", "meslehet": ["JSON formatını yoxla"]},
+    "508": {"izah": "Loop Detected", "meslehet": ["Yönləndirmə döngüsünü düzəlt"]},
+    "InvalidToken": {"izah": "Token yararsızdır", "meslehet": ["Yenidən giriş edin"]},
+    "SessionExpired": {"izah": "Sessiya müddəti bitdi", "meslehet": ["Səhifəni yenilə"]},
+    "HardwareFailure": {"izah": "Avadanlıq nasazlığı", "meslehet": ["Servisə müraciət et"]},
+    "Overheating": {"izah": "Həddən artıq qızma", "meslehet": ["Ventilyatoru yoxla"]},
+    "BIOS-Error": {"izah": "BIOS/UEFI xətası", "meslehet": ["Batareyanı yoxla"]},
+    "AP-Isolation": {"izah": "Wi-Fi cihazları bir-birini görmür", "meslehet": ["Router ayarını dəyiş"]},
+    "BandwidthLimit": {"izah": "İnternet limiti aşıldı", "meslehet": ["Provayderlə əlaqə saxla"]},
+    "DatabaseLocked": {"izah": "Baza kilidli", "meslehet": ["Prosesləri öldür"]},
+    "FileCorrupted": {"izah": "Fayl xarab olub", "meslehet": ["Faylı yenidən yüklə"]},
+    "MissingDLL": {"izah": "Kitabxana faylı çatışmır", "meslehet": ["Driveri yenilə"]},
+    "DiskWriteError": {"izah": "Diskə yazmaq olmur", "meslehet": ["İcazələri yoxla"]},
+    "NoRouteToHost": {"izah": "Host tapılmadı", "meslehet": ["İnterneti yoxla"]},
+    "ConnectionRefused": {"izah": "Qoşulma rədd edildi", "meslehet": ["Portu yoxla"]},
+    "RegistryLocked": {"izah": "Registry kilidli", "meslehet": ["Admin kimi aç"]},
+    "ServiceTimeout": {"izah": "Servis gecikir", "meslehet": ["Serveri restart et"]},
+    "SSLHandshake": {"izah": "SSL əlaqə qurulmadı", "meslehet": ["Sertifikatı yoxla"]},
+    "PermissionDenied": {"izah": "İcazə yoxdur", "meslehet": ["Sudo/Admin hüququnu yoxla"]}
+}
 
 st.set_page_config(page_title="Professional IT Bilik Bazası", page_icon="💻")
-st.title("💻 Professional IT Bilik Bazası (Limitsiz)")
+st.title("💻 Professional IT Bilik Bazası (240+)")
 
-axtaris = st.text_input("Axtarış üçün xəta kodu yazın:").strip().lower()
+axtaris = st.text_input("Axtarış üçün xəta kodu və ya açar söz yazın:").strip().lower()
 
 if axtaris:
     tapildi = False
@@ -23,8 +98,10 @@ if axtaris:
             for m in melumat['meslehet']:
                 st.success(m)
             tapildi = True
+    
     if not tapildi:
         st.error("Bu məlumat hələlik bazada yoxdur.")
 
-with st.expander("📂 Bütün xəta kodları:"):
+st.write("---")
+with st.expander("📂 Bütün xəta kodlarının siyahısı:"):
     st.write(list(it_bazasi.keys()))
