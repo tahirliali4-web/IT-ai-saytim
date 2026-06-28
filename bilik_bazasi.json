@@ -1,12 +1,32 @@
-{
-    "400": {"izah": "Bad Request", "meslehet": ["URL-i yoxla", "Parametrləri düzəlt"]},
-    "401": {"izah": "Unauthorized", "meslehet": ["Giriş edin", "Token-i yoxla"]},
-    "403": {"izah": "Forbidden", "meslehet": ["İcazələri yoxla", "Adminlə əlaqə saxla"]},
-    "500": {"izah": "Internal Server Error", "meslehet": ["Loglara bax", "Serveri yenilə"]},
-    "DNS": {"izah": "Ad həlli xətası", "meslehet": ["8.8.8.8-ə keç", "İnterneti yoxla"]},
-    "RAM": {"izah": "Yaddaş çatışmazlığı", "meslehet": ["Proqramları bağla", "Restart et"]},
-    "CPU-Overheating": {"izah": "Prosessor çox qızıb", "meslehet": ["Soyutmanı yoxla"]},
-    "K8s-CrashLoop": {"izah": "Pod daim yenilənir", "meslehet": ["Pod loglarını yoxla"]},
-    "SQLi": {"izah": "SQL İnjektion hücumu", "meslehet": ["Sorğuları parametrli yaz"]}
-    // Bura bütün digər 240+ maddəni əlavə edə bilərsən
-}
+import streamlit as st
+import json
+
+# JSON faylını oxuyan funksiya
+def melumatlari_yukle():
+    with open("bilik_bazasi.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+
+st.set_page_config(page_title="Professional IT Bilik Bazası", page_icon="💻")
+st.title("💻 Professional IT Bilik Bazası")
+
+# Məlumatları JSON-dan çəkirik
+it_bazasi = melumatlari_yukle()
+
+axtaris = st.text_input("Axtarış üçün xəta kodu və ya açar söz yazın:").strip().lower()
+
+if axtaris:
+    tapildi = False
+    for kod, melumat in it_bazasi.items():
+        if axtaris in kod.lower() or axtaris in melumat['izah'].lower():
+            st.subheader(f"✅ Tapıldı: {kod}")
+            st.info(f"İzahı: {melumat['izah']}")
+            st.subheader("💡 Məsləhətlər:")
+            for m in melumat['meslehet']:
+                st.success(m)
+            tapildi = True
+    if not tapildi:
+        st.error("Bu məlumat hələlik bazada yoxdur.")
+
+st.write("---")
+with st.expander("📂 Bütün xəta kodları:"):
+    st.write(list(it_bazasi.keys()))
