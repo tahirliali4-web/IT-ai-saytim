@@ -1,24 +1,6 @@
-import streamlit as st
-import json
-
-def melumatlari_yukle():
-    with open("bilik_bazasi.json", "r", encoding="utf-8") as f:
-        return json.load(f)
-
-it_bazasi = melumatlari_yukle()
-
-st.title("Professional IT Bilik Bazası")
-axtaris = st.text_input("Axtarış üçün xəta kodu yazın:").strip().lower()
-
-if axtaris:
-    tapildi = False
-    for kod, melumat in it_bazasi.items():
-        if axtaris in kod.lower() or axtaris in melumat['izah'].lower():
-            st.subheader(f"✅ Tapıldı: {kod}")
-            st.info(f"İzahı: {melumat['izah']}")
-            st.subheader("💡 Məsləhətlər:")
-            for m in melumat['meslehet']:
-                st.success(m)
-            tapildi = True
-    if not tapildi:
-        st.error("Tapılmadı.")
+{
+    "404": {"izah": "Not Found", "meslehet": ["URL-i yoxla"]},
+    "500": {"izah": "Internal Server Error", "meslehet": ["Loglara bax"]},
+    "AWS-S3-403": {"izah": "S3 Access Denied", "meslehet": ["Policy-ni yoxla"]}
+    // Bura 500+ maddəni rahatlıqla yaza bilərsən
+}
